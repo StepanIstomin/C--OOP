@@ -82,12 +82,12 @@ size_t usingVector(const std::vector<int>& input)
 }
 size_t usingUnSet(const std::vector<int>& input)
 {
-	std::unordered_set<int> unique;
-	unique.reserve(input.size());
+	std::unordered_set<int> uniq;
+	uniq.reserve(input.size());
 	for (int item : input) {
-		unique.insert(item);
+		uniq.insert(item);
 	}
-	return unique.size();
+	return uniq.size();
 }
 // Task 3
 enum Suit {
