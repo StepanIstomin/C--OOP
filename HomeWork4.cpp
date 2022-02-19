@@ -131,8 +131,18 @@ class Hand
 public:
 	Hand() {};
 	void Add(Card* _card) { hand.push_back(_card); }
-	void Clear() { hand.clear(); }
+	void Clear() { 
+		std::vector<Card*>::iterator iter = hand.begin();
+		for (iter = hand.begin(); iter != hand.end(); ++iter)
+		{
+			delete* iter;
+			*iter = 0;
+		}
+		hand.clear(); 
+	}
 	int GetValue() {
+		if (hand.empty())
+			return 0;
 		if (hand.size()) {
 			size_t sum = 0;
 			size_t aceCount = 0;
@@ -195,22 +205,24 @@ int main()
 	//task3
 	{
 		Hand playerHand;
-	
-		Card card1(HEARTS, EIGHT);
-		Card* pcard1 = &card1;
+		cout << playerHand.GetValue() << endl;
+
+		Card* pcard1;
+		pcard1 = new Card(HEARTS, EIGHT);
 		playerHand.Add(pcard1);
-		//cout << card1.GetValue() << endl;
 	
-		Card card2(CLUBS, ACE);
-		Card* pcard2 = &card2;
+		Card* pcard2;
+		pcard2 = new Card(CLUBS, ACE);
 		playerHand.Add(pcard2);
-		//cout << card2.GetValue() << endl;
 	
-		Card card3(HEARTS, ACE);
-		Card* pcard3 = &card3;
+		Card* pcard3;
+		pcard3 = new Card(HEARTS, ACE);
 		playerHand.Add(pcard3);
-		//cout << card3.GetValue() << endl;
 	
 		cout << playerHand.GetValue() << endl;
+		playerHand.Clear();
+		cout << playerHand.GetValue() << endl;
+
 	}
+	return 0;
 }
